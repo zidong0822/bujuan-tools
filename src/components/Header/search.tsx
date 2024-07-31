@@ -146,7 +146,7 @@ export const DialogSearch = (props: { open: boolean; onClose(): void }) => {
   );
 
   const onSearch = () => {
-    if (!keywords) {
+    if (!keywords.trim()) {
       return;
     }
     onClose();
@@ -195,7 +195,7 @@ export const DialogSearch = (props: { open: boolean; onClose(): void }) => {
           readOnly: false,
           autoFocus: true,
           onChange: (e) => {
-            setKeywords(e.target.value.trim());
+            setKeywords(e.target.value);
           },
           onKeyDown: (e) => {
             if (e.key === 'Enter') {
