@@ -20,7 +20,7 @@ import { usePath } from '@/hooks';
 import { useMemo } from 'react';
 import { allTools } from '@/utils/tools';
 import Head from 'next/head';
-import { Header as RiverHeader } from '@chaitin_rivers/multi_river';
+import RiverHeader from '../components/Header';
 import '@chaitin_rivers/excalidraw/index.css';
 
 const clientSideEmotionCache = createEmotionCache();
@@ -64,8 +64,15 @@ export default function App({
           <AnchorContextProvider>
             <LikeContextProvider>
               <QueryClientProvider client={queryClient}>
-                {isProduction ? <RiverHeader noSsr={false} /> : null}
-                <Stack sx={{ width: '1180px', mx: 'auto', height: '100%' }}>
+                {isProduction ? <RiverHeader /> : null}
+                <Stack
+                  sx={{
+                    width: '1180px',
+                    mx: 'auto',
+                    height: '100%',
+                    mt: isProduction ? '64px' : 0,
+                  }}
+                >
                   <Header />
                   <Stack
                     direction='row'
