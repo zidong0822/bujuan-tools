@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { Box, AppBar, Stack, Link, Button } from '@mui/material';
+import logoSvg from '@/asset/img/logo.svg';
+import Image from 'next/image';
 
 import Search from './search';
 
@@ -55,14 +57,14 @@ const Header = () => {
         justifyContent='space-between'
       >
         <Stack direction='row' alignItems='center'>
-          <Box
-            component='img'
-            src='/tools/logo.svg'
+          <Image
+            src={logoSvg}
+            alt=''
             onClick={() => {
               window.open('/', '_self');
             }}
-            sx={{ ml: 5, mr: 10, cursor: 'pointer' }}
-          />
+            style={{ marginLeft: 40, marginRight: 80, cursor: 'pointer' }}
+          ></Image>
 
           <Stack direction='row' gap={5} alignItems='center'>
             {NAV_LINK.map((item) => (
