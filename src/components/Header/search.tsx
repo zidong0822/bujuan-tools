@@ -25,7 +25,6 @@ import {
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import { useLocalStorageState } from 'ahooks';
-import { useRouter } from 'next/navigation';
 
 const innerTheme = createTheme({
   palette: {
@@ -137,7 +136,6 @@ SearchBase.displayName = 'SearchBase';
 export const DialogSearch = (props: { open: boolean; onClose(): void }) => {
   const { open, onClose } = props;
   const [keywords, setKeywords] = useState('');
-  const router = useRouter();
   const [recentSearch, setRecentSearch] = useLocalStorageState<string[]>(
     'recent-search',
     {
@@ -146,7 +144,7 @@ export const DialogSearch = (props: { open: boolean; onClose(): void }) => {
   );
 
   const onSearch = () => {
-    if (!keywords) {
+    if (!keywords.trim()) {
       return;
     }
     onClose();
@@ -165,7 +163,7 @@ export const DialogSearch = (props: { open: boolean; onClose(): void }) => {
     } else {
       setRecentSearch([keywords]);
     }
-    router.push(`/v3/s?keywords=${keywords}`);
+    window.open(`/s?keywords=${keywords}`, '_self');
   };
 
   return (
@@ -195,7 +193,7 @@ export const DialogSearch = (props: { open: boolean; onClose(): void }) => {
           readOnly: false,
           autoFocus: true,
           onChange: (e) => {
-            setKeywords(e.target.value.trim());
+            setKeywords(e.target.value);
           },
           onKeyDown: (e) => {
             if (e.key === 'Enter') {
@@ -249,7 +247,7 @@ export const DialogSearch = (props: { open: boolean; onClose(): void }) => {
                 }
                 onClick={() => {
                   onClose();
-                  router.push(`/v3/s?keywords=${k}`);
+                  window.open(`/s?keywords=${k}`, '_self');
                 }}
               >
                 <ListItemButton sx={{ pl: 1 }}>

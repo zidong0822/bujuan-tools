@@ -8,11 +8,11 @@ import Search from './search';
 const NAV_LINK = [
   {
     title: '行业百科',
-    href: '/v3/wiki',
+    href: '/wiki',
   },
   {
     title: '技术博客',
-    href: '/v3/blog',
+    href: '/blog',
   },
   {
     title: '在线工具',
@@ -21,7 +21,7 @@ const NAV_LINK = [
   },
   {
     title: '漏洞情报',
-    href: '/v3/vuldb',
+    href: '/vuldb',
   },
 ];
 
@@ -57,7 +57,7 @@ const Header = () => {
         <Stack direction='row' alignItems='center'>
           <Box
             component='img'
-            src='/logo.svg'
+            src='/tools/logo.svg'
             onClick={() => {
               window.open('/', '_self');
             }}
@@ -112,7 +112,7 @@ const Header = () => {
                 variant='contained'
                 sx={{ width: 102, boxShadow: 'none', borderRadius: 1 }}
                 onClick={() => {
-                  window.open('/workbench', '_self');
+                  window.open('/console/workbench', '_self');
                 }}
               >
                 工作台
