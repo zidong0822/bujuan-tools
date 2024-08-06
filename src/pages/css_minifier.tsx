@@ -1,10 +1,10 @@
-import MainContent from '@/components/MainContent';
 import alert from '@/components/Alert';
+import MainContent from '@/components/MainContent';
 import { Box, Button, Checkbox, Stack, Typography } from '@mui/material';
+import CleanCSS, { type Options } from 'clean-css';
 import { useCallback, useEffect, useState } from 'react';
 import AceEditor from 'react-ace';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import CleanCSS, { type Options } from 'clean-css';
 
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/mode-css';
@@ -91,103 +91,94 @@ const _C = () => {
         }}
       >
         <Stack
-          sx={{ mb: 1 }}
-          justifyContent={'center'}
-          direction={'row'}
-          spacing={2}
+          direction='row'
+          alignItems='center'
+          justifyContent='space-between'
+          sx={{ width: '100%', mb: 2 }}
         >
-          <Stack
-            direction='row'
-            alignItems='center'
-            justifyContent='space-between'
-            sx={{ width: '100%' }}
-          >
-            <Typography sx={{ fontSize: '14px' }}>CSS 内容</Typography>
-            <Box>
-              <Button size='small' onClick={() => setValue('')}>
-                清空
-              </Button>
-              <Button
+          <Typography sx={{ fontSize: '14px' }}>CSS 内容</Typography>
+          <Box>
+            <Button size='small' onClick={() => setValue('')}>
+              清空
+            </Button>
+            <Button
+              size='small'
+              variant='outlined'
+              onClick={handleButtonClick}
+              sx={{ borderRadius: '4px', ml: 1 }}
+            >
+              上传 CSS
+            </Button>
+          </Box>
+        </Stack>
+        <AceEditor
+          name='a'
+          fontSize={16}
+          style={{
+            width: '100%',
+            borderRadius: '4px',
+            height: '400px',
+          }}
+          value={value}
+          mode='css'
+          theme='monokai'
+          onChange={setValue}
+          editorProps={{ $blockScrolling: true }}
+        />
+        <Stack
+          direction='row'
+          alignItems='center'
+          justifyContent='space-between'
+          sx={{ width: '100%', my: 2 }}
+        >
+          <Stack direction='row' alignItems='center'>
+            <Typography sx={{ fontSize: '14px' }}>压缩结果</Typography>
+            <Box ml={1}>
+              <Checkbox
                 size='small'
-                variant='outlined'
-                onClick={handleButtonClick}
-                sx={{ borderRadius: '4px', ml: 1 }}
+                checked={Boolean(keepBreaks)}
+                onChange={(event: any) => setKeepBreaks(event.target.checked)}
+              />
+              <Typography
+                component='span'
+                sx={{ fontSize: '14px', lineHeight: '38px' }}
               >
-                上传 CSS
-              </Button>
+                压缩保留换行
+              </Typography>
             </Box>
           </Stack>
-          <Stack
-            direction='row'
-            alignItems='center'
-            justifyContent='space-between'
-            sx={{ width: '100%' }}
-          >
-            <Stack direction='row' alignItems='center'>
-              <Typography sx={{ fontSize: '14px' }}>压缩结果</Typography>
-              <Box ml={1}>
-                <Checkbox
-                  size='small'
-                  checked={Boolean(keepBreaks)}
-                  onChange={(event: any) => setKeepBreaks(event.target.checked)}
-                />
-                <Typography
-                  component='span'
-                  sx={{ fontSize: '14px', lineHeight: '38px' }}
-                >
-                  压缩保留换行
-                </Typography>
-              </Box>
-            </Stack>
-            <Box>
-              <CopyToClipboard text={result} onCopy={handleClick}>
-                <Button size='small' disabled={!result}>
-                  复制
-                </Button>
-              </CopyToClipboard>
-              <Button
-                size='small'
-                variant='contained'
-                disabled={!!error || !result}
-                onClick={handleDownloadResult}
-                sx={{ borderRadius: '4px', ml: 1 }}
-              >
-                导出
+          <Box>
+            <CopyToClipboard text={result} onCopy={handleClick}>
+              <Button size='small' disabled={!result}>
+                复制
               </Button>
-            </Box>
-          </Stack>
+            </CopyToClipboard>
+            <Button
+              size='small'
+              variant='contained'
+              disabled={!!error || !result}
+              onClick={handleDownloadResult}
+              sx={{ borderRadius: '4px', ml: 1 }}
+            >
+              导出
+            </Button>
+          </Box>
         </Stack>
-        <Stack direction={'row'} spacing={3}>
-          <AceEditor
-            name='a'
-            fontSize={16}
-            style={{
-              width: '100%',
-              borderRadius: '4px',
-              height: 'calc(100vh - 265px)',
-            }}
-            value={value}
-            mode='css'
-            theme='monokai'
-            onChange={setValue}
-            editorProps={{ $blockScrolling: true }}
-          />
-          <AceEditor
-            name='b'
-            fontSize={16}
-            style={{
-              width: '100%',
-              borderRadius: '4px',
-              height: 'calc(100vh - 265px)',
-            }}
-            wrapEnabled={!keepBreaks}
-            value={error || result}
-            mode='css'
-            theme='monokai'
-            readOnly
-            editorProps={{ $blockScrolling: true }}
-          />
-        </Stack>
+        <AceEditor
+          name='b'
+          fontSize={16}
+          style={{
+            width: '100%',
+            borderRadius: '4px',
+            height: '400px',
+          }}
+          wrapEnabled={!keepBreaks}
+          value={error || result}
+          mode='css'
+          theme='monokai'
+          readOnly
+          editorProps={{ $blockScrolling: true }}
+        />
         <Box
           component={'input'}
           id='fileInput'
