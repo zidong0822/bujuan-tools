@@ -1,16 +1,16 @@
-import MainContent from '@/components/MainContent';
 import alert from '@/components/Alert';
+import MainContent from '@/components/MainContent';
+import SwapHorizontalCircleIcon from '@mui/icons-material/SwapHorizontalCircle';
 import { Box, Button, Stack } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import AceEditor from 'react-ace';
-import SwapHorizontalCircleIcon from '@mui/icons-material/SwapHorizontalCircle';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { parseStringPromise, Builder } from 'xml2js';
+import { Builder, parseStringPromise } from 'xml2js';
 
 import 'ace-builds/src-noconflict/ext-language_tools';
-import 'ace-builds/src-noconflict/theme-monokai';
 import 'ace-builds/src-noconflict/mode-json';
 import 'ace-builds/src-noconflict/mode-xml';
+import 'ace-builds/src-noconflict/theme-monokai';
 
 /**
  * A => json
@@ -179,8 +179,22 @@ const _C = () => {
           },
         }}
       >
+        <AceEditor
+          name='a'
+          fontSize={16}
+          style={{
+            width: '100%',
+            borderRadius: '4px',
+            height: 'calc(100vh - 310px)',
+          }}
+          value={convert === ConvertType.B2A ? b : a}
+          mode={convert === ConvertType.B2A ? AceMode.B2A : AceMode.A2B}
+          theme='monokai'
+          onChange={convert === ConvertType.B2A ? setB : setA}
+          editorProps={{ $blockScrolling: true }}
+        />
         <Stack
-          sx={{ mb: 2 }}
+          sx={{ my: 2 }}
           justifyContent={'center'}
           direction={'row'}
           spacing={2}
@@ -245,36 +259,20 @@ const _C = () => {
             </Stack>
           </Stack>
         </Stack>
-        <Stack direction={'row'} spacing={3}>
-          <AceEditor
-            name='a'
-            fontSize={16}
-            style={{
-              width: '100%',
-              borderRadius: '4px',
-              height: 'calc(100vh - 310px)',
-            }}
-            value={convert === ConvertType.B2A ? b : a}
-            mode={convert === ConvertType.B2A ? AceMode.B2A : AceMode.A2B}
-            theme='monokai'
-            onChange={convert === ConvertType.B2A ? setB : setA}
-            editorProps={{ $blockScrolling: true }}
-          />
-          <AceEditor
-            name='b'
-            fontSize={16}
-            style={{
-              width: '100%',
-              borderRadius: '4px',
-              height: 'calc(100vh - 310px)',
-            }}
-            value={error || (convert === ConvertType.B2A ? a : b)}
-            mode={convert === ConvertType.B2A ? AceMode.A2B : AceMode.B2A}
-            theme='monokai'
-            readOnly
-            editorProps={{ $blockScrolling: true }}
-          />
-        </Stack>
+        <AceEditor
+          name='b'
+          fontSize={16}
+          style={{
+            width: '100%',
+            borderRadius: '4px',
+            height: 'calc(100vh - 310px)',
+          }}
+          value={error || (convert === ConvertType.B2A ? a : b)}
+          mode={convert === ConvertType.B2A ? AceMode.A2B : AceMode.B2A}
+          theme='monokai'
+          readOnly
+          editorProps={{ $blockScrolling: true }}
+        />
         <Box
           component={'input'}
           id='fileInput'
