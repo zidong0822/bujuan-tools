@@ -1,11 +1,31 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Box, AppBar, Stack, Link, Button } from '@mui/material';
+import {
+  Box,
+  AppBar,
+  Stack,
+  Link,
+  Button,
+  Menu,
+  MenuItem,
+} from '@mui/material';
 import logoSvg from '@/asset/img/logo.svg';
 import Image from 'next/image';
-
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import Search from './search';
+
+const MENU = [
+  {
+    title: 'WebShell 检测',
+    href: '/webShell',
+  },
+  {
+    title: '其他工具',
+    href: '/tools',
+    target: '_blank',
+  },
+];
 
 const NAV_LINK = [
   {
@@ -20,16 +40,17 @@ const NAV_LINK = [
     title: '在线工具',
     href: '/tools',
     target: '_blank',
+    type: 'menu',
   },
   {
     title: '漏洞情报',
     href: '/vuldb',
   },
 ];
-
 const Header = () => {
   const [user, setUser] = useState<any>(null);
-
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
   useEffect(() => {
     fetch('/api/v1/user/profile', {
       credentials: 'include',
@@ -73,12 +94,24 @@ const Header = () => {
                 component={Link}
                 color='#999'
                 underline='none'
+                onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                  if (item.type === 'menu') {
+                    setAnchorEl(e.currentTarget);
+                  }
+                }}
                 onClick={(e) => {
                   e.preventDefault();
-                  window.open(item.href, '_self');
+                  if (item.type === 'menu') {
+                    return;
+                  } else {
+                    window.open(item.href, '_self');
+                  }
                 }}
                 sx={{
+                  display: 'flex',
+                  alignItems: 'center',
                   fontSize: '16px',
+                  gap: 0.5,
                   color: '#041B0F',
                   fontWeight: 700,
                   '&:hover': {
@@ -87,10 +120,51 @@ const Header = () => {
                 }}
               >
                 {item.title}
+                {item.type === 'menu' && (
+                  <PlayArrowRoundedIcon
+                    sx={{
+                      transform: 'rotate(90deg)',
+                      color: '#041B0F',
+                      mt: '-2px',
+                      fontSize: 18,
+                    }}
+                  />
+                )}
               </Box>
             ))}
           </Stack>
         </Stack>
+
+        <Menu
+          anchorEl={anchorEl}
+          open={open}
+          onClose={() => {
+            setAnchorEl(null);
+          }}
+          PaperProps={{
+            sx: { mt: 1.5 },
+          }}
+        >
+          {MENU.map((item) => (
+            <MenuItem
+              component={Link}
+              key={item.title}
+              sx={{
+                width: '180px',
+                fontSize: '14px',
+                '&:hover': {
+                  color: 'primary.main',
+                },
+              }}
+              onClick={() => {
+                setAnchorEl(null);
+                window.open(item.href);
+              }}
+            >
+              {item.title}
+            </MenuItem>
+          ))}
+        </Menu>
 
         <Stack
           direction='row'
