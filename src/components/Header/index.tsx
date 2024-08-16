@@ -21,6 +21,14 @@ const MENU = [
     href: '/webShell',
   },
   {
+    title: '编码转化',
+    href: `/toolkit/cyberChef/Base64Encoder`,
+  },
+  {
+    title: '加密解密',
+    href: `/toolkit/cyberChef/AESEncrypt`,
+  },
+  {
     title: '其他工具',
     href: '/tools',
     target: '_blank',
@@ -101,6 +109,7 @@ const Header = () => {
                 }}
                 onClick={(e) => {
                   e.preventDefault();
+                  e.stopPropagation();
                   if (item.type === 'menu') {
                     return;
                   } else {
@@ -154,6 +163,10 @@ const Header = () => {
                 fontSize: '14px',
                 '&:hover': {
                   color: 'primary.main',
+                  backgroundColor: 'rgba(0, 0, 0, 0.12) !important',
+                },
+                '&:focus': {
+                  backgroundColor: 'transparent',
                 },
               }}
               onClick={() => {
