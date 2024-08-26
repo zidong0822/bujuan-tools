@@ -29,6 +29,14 @@ const MENU = [
     href: `/toolkit/cyberChef/AESEncrypt`,
   },
   {
+    title: '代码格式化',
+    href: `/toolkit/format/html`,
+  },
+  {
+    title: '代码截图',
+    href: `/toolkit/codeshot`,
+  },
+  {
     title: '其他工具',
     href: '/tools',
     target: '_blank',
