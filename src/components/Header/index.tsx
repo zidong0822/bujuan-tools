@@ -9,11 +9,9 @@ import {
   Button,
   Menu,
   MenuItem,
+  Typography,
 } from '@mui/material';
-import logoSvg from '@/asset/img/logo.svg';
-import Image from 'next/image';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
-import Search from './search';
 
 const MENU = [
   {
@@ -49,8 +47,8 @@ const NAV_LINK = [
     href: '/wiki',
   },
   {
-    title: '技术博客',
-    href: '/blog',
+    title: '技术讨论',
+    href: '/discussion',
   },
   {
     title: '在线工具',
@@ -94,14 +92,28 @@ const Header = () => {
         justifyContent='space-between'
       >
         <Stack direction='row' alignItems='center'>
-          <Image
+          {/* <Image
             src={logoSvg}
             alt=''
             onClick={() => {
               window.open('/', '_self');
             }}
             style={{ marginLeft: 40, marginRight: 80, cursor: 'pointer' }}
-          ></Image>
+          ></Image> */}
+          <Typography
+            variant='h2'
+            sx={{
+              ml: 5,
+              mr: 10,
+              cursor: 'pointer',
+              fontSize: 14,
+              fontWeight: 700,
+              color: '#000',
+            }}
+            onClick={() => window.open('/', '_self')}
+          >
+            长亭百川云
+          </Typography>
 
           <Stack direction='row' gap={5} alignItems='center'>
             {NAV_LINK.map((item) => (
@@ -127,9 +139,9 @@ const Header = () => {
                 sx={{
                   display: 'flex',
                   alignItems: 'center',
-                  fontSize: '16px',
+                  fontSize: '14px',
                   gap: 0.5,
-                  color: '#041B0F',
+                  color: 'rgba(0,0,0,0.5)',
                   fontWeight: 700,
                   '&:hover': {
                     color: 'primary.main',
@@ -141,9 +153,9 @@ const Header = () => {
                   <PlayArrowRoundedIcon
                     sx={{
                       transform: 'rotate(90deg)',
-                      color: '#041B0F',
-                      mt: '-2px',
-                      fontSize: 18,
+                      color: 'rgba(0,0,0,0.5)',
+                      mt: '-1px',
+                      fontSize: 12,
                     }}
                   />
                 )}
@@ -189,50 +201,48 @@ const Header = () => {
 
         <Stack
           direction='row'
-          sx={{ position: 'absolute', top: 0, bottom: 0, right: 0 }}
+          alignItems={'center'}
+          gap={3}
+          sx={{ position: 'absolute', top: 0, bottom: 0, right: 40 }}
         >
-          <Search
-            type='icon-button'
-            SearchRoundedIconProps={{
-              sx: {
-                mt: '22px',
-                mr: 2,
-                color: '#000',
-                fontSize: 20,
-                cursor: 'pointer',
-              },
-            }}
-          />
           {user ? (
-            <Stack justifyContent='center' sx={{ pr: 3 }}>
-              <Button
-                variant='contained'
-                sx={{ width: 102, boxShadow: 'none', borderRadius: 1 }}
-                onClick={() => {
-                  window.open('/console/workbench', '_self');
-                }}
-              >
-                工作台
-              </Button>
-            </Stack>
+            <Button
+              variant='contained'
+              sx={{
+                borderRadius: 1,
+                height: 44,
+                width: 122,
+                fontSize: 14,
+                boxShadow: 'none !important',
+              }}
+              onClick={() => {
+                window.open('/console/workbench', '_self');
+              }}
+            >
+              工作台
+            </Button>
           ) : (
             <>
               <Button
-                sx={{ borderRadius: 0, px: 3 }}
-                onClick={() => {
-                  window.open('/login', '_self');
-                }}
-              >
-                登录
-              </Button>
-              <Button
-                variant='contained'
-                sx={{ borderRadius: 0, px: 3 }}
+                variant='outlined'
+                sx={{ borderRadius: 1, height: 44, width: 122, fontSize: 14 }}
                 onClick={() => {
                   window.open('/register', '_self');
                 }}
               >
                 立即注册
+              </Button>
+              <Button
+                variant='contained'
+                sx={{
+                  borderRadius: 1,
+                  height: 44,
+                  width: 122,
+                  fontSize: 14,
+                  boxShadow: 'none !important',
+                }}
+              >
+                登录
               </Button>
             </>
           )}
