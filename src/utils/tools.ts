@@ -311,6 +311,13 @@ export const allTools: Tool[] = [
     subTitle: '自动生成 XSS Payload',
   },
   {
+    label: 'CIDR 聚合工具',
+    tags: [Tags.OTHER],
+    path: '/cidr_aggregator',
+    key: ['CIDR', 'IP', 'IPv4', 'IPv6'],
+    subTitle: '在线聚合 IP / CIDR 小工具',
+  },
+  {
     label: 'Leet 转换器',
     tags: [Tags.OTHER, Tags.TEXT],
     path: '/leet_convert',
