@@ -2,7 +2,7 @@ import InputEditor from '@/components/CIDR/InputEditor';
 import OptionsControl from '@/components/CIDR/OptionsControl';
 import OutputEditor from '@/components/CIDR/OutputEditor';
 import MainContent from '@/components/MainContent';
-import { aggregate } from '@/pkg/cidr_aggregator';
+import { useWasm } from '@/hooks/useWasm';
 import {
   Box,
   Button,
@@ -21,6 +21,8 @@ function App() {
   const [bogonFilter, setBogonFilter] = useState(
     undefined as 'reserved' | undefined
   );
+  const wasm = useWasm();
+
   const toggleIpv4 = () => {
     setIpKind((prev) => {
       if (prev === 'both' || prev === 'ipv4') {
@@ -49,17 +51,19 @@ function App() {
     });
   };
   const handleAggregate = async (reverse = false) => {
-    setOutput(
-      Object.assign(
-        { reverse },
-        await aggregate(input, reverse, bogonFilter === 'reserved')
-      )
-    );
+    if (wasm) {
+      setOutput(
+        Object.assign(
+          { reverse },
+          wasm.aggregate(input, reverse, bogonFilter === 'reserved')
+        )
+      );
+    }
   };
   useEffect(() => {
     output && handleAggregate(output.reverse);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bogonFilter]);
+  }, [bogonFilter, wasm]);
 
   return (
     <MainContent>
