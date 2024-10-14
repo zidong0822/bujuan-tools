@@ -22,6 +22,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+import dayjs from 'dayjs';
 import Image from 'next/image';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -134,7 +135,7 @@ const Unix: React.FC = () => {
   const [inputUnix, setInputUnix] = useState<number>(initUnix());
   const [outTime, setOutTime] = useState<string>('');
   const [inputTime, setInputTime] = useState<string>(
-    new Date().toLocaleString().replace(/,/g, '')
+    dayjs().format('YYYY-MM-DD HH:mm:ss')
   );
   const [outUnix, setOutUnix] = useState<number>();
   const [code, setCode] = useState<string>('Rust');
@@ -165,9 +166,9 @@ const Unix: React.FC = () => {
   );
   const handelTransUnixInput = useCallback(() => {
     setOutTime(
-      new Date(inputUnix * (inputUnit === Unit.second ? 1000 : 1))
-        .toLocaleString()
-        .replace(/,/g, '')
+      dayjs
+        .unix(inputUnix / (inputUnit === Unit.second ? 1 : 1000))
+        .format('YYYY-MM-DD HH:mm:ss')
     );
   }, [inputUnit, inputUnix]);
   const handelSetOutTime = useCallback(
