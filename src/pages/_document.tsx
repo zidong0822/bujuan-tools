@@ -23,7 +23,6 @@ export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
         {emotionStyleTags}
       </Head>
       <body style={{ margin: 0 }}>
-        <div id={'rivers-header'}></div>
         <Main />
         <NextScript />
       </body>
