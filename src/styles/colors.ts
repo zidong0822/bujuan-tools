@@ -32,7 +32,7 @@ export const leastTextClick = '#737373';
 export const disabledText = '#BFBFBF';
 export const specialText = '#737971';
 
-export const success = 'rgba(52, 90, 255, 1)';
+export const success = '#389E0E';
 export const warning = '#FFBF00';
 export const error = '#FF1F1F';
 

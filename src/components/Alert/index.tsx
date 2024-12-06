@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { primary } from '@/styles/colors';
+import { success } from '@/styles/colors';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps, AlertColor } from '@mui/material/Alert';
 import { createRoot } from 'react-dom/client';
@@ -36,7 +36,7 @@ function WarningBar(props: WarningProps) {
       <Alert
         sx={{
           borderRadius: '0',
-          '&.MuiAlert-filledSuccess': { backgroundColor: primary },
+          '&.MuiAlert-filledSuccess': { backgroundColor: success },
         }}
         icon={false}
         color={props?.color}
