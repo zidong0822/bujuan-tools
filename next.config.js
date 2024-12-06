@@ -21,9 +21,12 @@ const nextConfig = withPlugins([withTM], {
         permanent: true,
       },
     ];
-  }: undefined,
+  } : undefined,
   webpack: (config) => {
     config.resolve.fallback = { fs: false };
+    config.experiments = {
+      asyncWebAssembly: true,
+    };
     return config;
   },
 });
