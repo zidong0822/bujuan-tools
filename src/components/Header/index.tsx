@@ -17,7 +17,6 @@ import {
   Typography,
 } from '@mui/material';
 import { useDebounceFn } from 'ahooks';
-import NextLink from 'next/link';
 
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -216,7 +215,6 @@ const Header = () => {
             {NAV_LINK.map((item) => (
               <Link
                 key={item.title}
-                component={NextLink}
                 color='#999'
                 underline='none'
                 href={item.href}
