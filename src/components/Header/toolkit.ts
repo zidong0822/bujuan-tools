@@ -550,23 +550,6 @@ export const ALL_TOOLKIT_LIST = [
     ],
   },
   {
-    name: '\u6570\u636e\u53ef\u89c6\u5316',
-    tools: [
-      {
-        name: '\u751f\u6210\u5357\u4e01\u683c\u5c14\u73ab\u7470\u56fe',
-        url: '/tools/chart_nightingale',
-      },
-      {
-        name: '\u751f\u6210\u6298\u7ebf\u56fe',
-        url: '/tools/chart_line',
-      },
-      {
-        name: '\u751f\u6210\u96f7\u8fbe\u56fe',
-        url: '/tools/chart_radar',
-      },
-    ],
-  },
-  {
     name: '\u6587\u5b57\u5904\u7406',
     tools: [
       {

@@ -55,7 +55,6 @@
     "css2less": "^0.1.4",
     "dayjs": "^1.11.10",
     "dompurify": "^3.0.6",
-    "echarts": "^5.4.3",
     "eslint-config-next": "^14.0.4",
     "figlet": "^1.7.0",
     "file-saver": "^2.0.5",
