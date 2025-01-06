@@ -20,7 +20,6 @@ import { usePath } from '@/hooks';
 import { useMemo } from 'react';
 import { allTools } from '@/utils/tools';
 import Head from 'next/head';
-import RiverHeader from '../components/Header';
 import '@chaitin_rivers/excalidraw/index.css';
 
 const clientSideEmotionCache = createEmotionCache();
@@ -47,13 +46,13 @@ export default function App({
         />
         <title>
           {currentItem?.label
-            ? currentItem?.label + ' - 百川在线工具箱'
-            : '百川云常用工具'}
+            ? currentItem?.label + ' - 布卷在线工具箱'
+            : '布卷常用工具'}
         </title>
         <meta
           name='description'
           property='og:description'
-          content={currentItem?.subTitle || '百川云常用工具'}
+          content={currentItem?.subTitle || '布卷常用工具'}
         />
         <meta name='keywords' content='常用的工具'></meta>
       </Head>
@@ -64,7 +63,6 @@ export default function App({
           <AnchorContextProvider>
             <LikeContextProvider>
               <QueryClientProvider client={queryClient}>
-                {isProduction ? <RiverHeader /> : null}
                 <Stack
                   sx={{
                     width: '1180px',

@@ -2,8 +2,8 @@ import { ToolCard } from '@/components/ToolCard';
 import { usePath } from '@/hooks';
 import { Tags } from '@/utils/tags';
 import { Tool, allTools } from '@/utils/tools';
-import GitHubIcon from '@mui/icons-material/GitHub';
 import SearchIcon from '@mui/icons-material/Search';
+import Image from 'next/image';
 import {
   Autocomplete,
   Box,
@@ -15,6 +15,7 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useMemo } from 'react';
+import logo from '@/asset/img/logo.png';
 
 const ifChecked = (currentPath: string, itemPath: string) => {
   return currentPath === itemPath;
@@ -70,16 +71,18 @@ const Header: React.FC<{}> = () => {
       alignItems='center'
       sx={{ width: '100%', height: '84px', flexShrink: 0 }}
     >
+      <Image width={40} alt={'logo'} src={logo} />
       <Typography
         variant='subtitle1'
         fontWeight={600}
-        sx={{ mr: 2, color: 'rgba(11, 37, 98, 1)' }}
+        sx={{ ml: 2, mr: 2, color: 'rgba(11, 37, 98, 1)' }}
       >
         <Link className='custom-link' href='/home'>
-          百川在线工具箱
+          布卷在线工具箱
         </Link>
       </Typography>
-      <Link className='custom-link' href='https://github.com/chaitin/xtools'>
+
+      {/* <Link className='custom-link' href='https://github.com/chaitin/xtools'>
         <GitHubIcon
           fontSize='small'
           sx={{
@@ -90,7 +93,7 @@ const Header: React.FC<{}> = () => {
             },
           }}
         />
-      </Link>
+      </Link> */}
       <Typography
         variant='body2'
         sx={{
@@ -101,13 +104,13 @@ const Header: React.FC<{}> = () => {
           },
         }}
       >
-        <Link
+        {/* <Link
           href='https://github.com/chaitin/xtools/issues'
           className='custom-link'
           target='_blank'
         >
           工具不够？提个需求
-        </Link>
+        </Link> */}
       </Typography>
       <Paper
         sx={{

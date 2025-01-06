@@ -179,7 +179,7 @@ const Header = () => {
             router.push('/');
           }}
         >
-          长亭百川云 {pathText ? ` - ${pathText}` : ''}
+          布卷工具箱 {pathText ? ` - ${pathText}` : ''}
         </Typography>
       </Stack>
 
@@ -208,7 +208,7 @@ const Header = () => {
               router.push('/');
             }}
           >
-            长亭百川云
+            布卷工具箱
           </Typography>
 
           <Stack direction='row' gap={5} alignItems='center'>
