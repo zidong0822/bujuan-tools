@@ -103,9 +103,6 @@ const theme = createTheme({
       .error:{
         color:"#ccc
       }
-      body{
-        padding-top: ${process.env.NODE_ENV === 'production' ? '64px' : '0'}
-      }
       #fullscreen-element{
         overflow: auto;
       }
